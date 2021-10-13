@@ -9,8 +9,10 @@
  "field_order": [
   "customer",
   "invoice_date",
-  "items",
+  "column_break_3",
   "total_amount",
+  "section_break_5",
+  "items",
   "amended_from"
  ],
  "fields": [
@@ -18,7 +20,8 @@
    "fieldname": "customer",
    "fieldtype": "Link",
    "label": "Customer",
-   "options": "Customer"
+   "options": "Customer",
+   "reqd": 1
   },
   {
    "default": "Today",
@@ -47,12 +50,20 @@
    "options": "Sales Invoice",
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_5",
+   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-10-13 16:27:17.419221",
+ "modified": "2021-10-13 21:34:12.041149",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Sales Invoice",
