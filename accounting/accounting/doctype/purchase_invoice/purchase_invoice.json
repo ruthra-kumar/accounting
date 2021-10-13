@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "format:PINV-{YY}-{MM}-{####}",
  "creation": "2021-10-13 16:33:11.079839",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -8,8 +9,10 @@
  "field_order": [
   "supplier",
   "invoice_date",
-  "items",
+  "column_break_3",
   "total_amount",
+  "section_break_5",
+  "items",
   "amended_from"
  ],
  "fields": [
@@ -47,16 +50,26 @@
   {
    "fieldname": "total_amount",
    "fieldtype": "Currency",
-   "label": "Total Amount"
+   "label": "Total Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_5",
+   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-10-13 16:34:09.996218",
+ "modified": "2021-10-13 21:48:53.228538",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Purchase Invoice",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
