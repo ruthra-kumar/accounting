@@ -14,10 +14,16 @@ function calculate_invoice_total(items){
 }
 
 frappe.ui.form.on('Purchase Invoice', {
-    // refresh: function(frm) {
-
-    // }
-
+    onload: function(frm){
+	if(!frm.doc.items){
+	    frm.set_value('total_amount', 0);
+	}
+    },
+    refresh: function(frm) {
+	frm.set_df_property('total_amount','read_only', true);
+	frm.set_df_property('status','read_only', true);
+	frm.set_df_property('invoice_date','read_only', true);
+    },
     validate: function(frm){
 	frm.doc.items.forEach(item => {
 	    if(Number.isInteger(Number.parseInt(item.quantity)) == false || Number.parseInt(item.quantity) <= 0){

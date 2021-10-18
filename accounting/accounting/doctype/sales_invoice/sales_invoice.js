@@ -14,16 +14,18 @@ function calculate_invoice_total(items){
 }
 
 frappe.ui.form.on('Sales Invoice', {
-    // refresh: function(frm) {
-
-    // }
-
     validate: function(frm){
 	frm.doc.items.forEach(item => {
 	    if(Number.isInteger(Number.parseInt(item.quantity)) == false || Number.parseInt(item.quantity) <= 0){
 		frappe.throw("Quantity should be a positive number");
 	    }
 	})
+    },
+    refresh: function(frm){
+	frm.set_df_property('status','read_only', true);
+	frm.set_df_property('invoice_date','read_only', true);
+	frm.set_df_property('total_amount','read_only', true);
+
     }
 });
 

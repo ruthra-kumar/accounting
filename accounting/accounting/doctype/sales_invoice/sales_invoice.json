@@ -11,6 +11,7 @@
   "invoice_date",
   "column_break_3",
   "total_amount",
+  "status",
   "section_break_5",
   "items",
   "amended_from"
@@ -28,8 +29,7 @@
    "fieldname": "invoice_date",
    "fieldtype": "Date",
    "in_list_view": 1,
-   "label": "Invoice Date",
-   "reqd": 1
+   "label": "Invoice Date"
   },
   {
    "fieldname": "items",
@@ -38,6 +38,7 @@
    "options": "Sales Invoice Items"
   },
   {
+   "default": "0",
    "fieldname": "total_amount",
    "fieldtype": "Currency",
    "label": "Total Amount"
@@ -58,12 +59,18 @@
   {
    "fieldname": "section_break_5",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Draft\nUnpaid\nPartly Paid\nPaid"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-10-13 21:34:12.041149",
+ "modified": "2021-10-15 17:24:17.024892",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Sales Invoice",

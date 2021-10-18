@@ -11,6 +11,7 @@
   "invoice_date",
   "column_break_3",
   "total_amount",
+  "status",
   "section_break_5",
   "items",
   "amended_from"
@@ -42,16 +43,9 @@
    "read_only": 1
   },
   {
-   "fieldname": "items",
-   "fieldtype": "Table",
-   "label": "Items",
-   "options": "Purchase Invoice Items"
-  },
-  {
    "fieldname": "total_amount",
    "fieldtype": "Currency",
-   "label": "Total Amount",
-   "read_only": 1
+   "label": "Total Amount"
   },
   {
    "fieldname": "column_break_3",
@@ -60,12 +54,24 @@
   {
    "fieldname": "section_break_5",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Purchase Invoice Items"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Draft\nUnpaid\nPartly Paid\nPaid"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-10-13 21:48:53.228538",
+ "modified": "2021-10-15 18:34:18.353136",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Purchase Invoice",
