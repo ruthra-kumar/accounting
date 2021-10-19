@@ -8,6 +8,7 @@
  "engine": "InnoDB",
  "field_order": [
   "item_name",
+  "category",
   "description",
   "quantity",
   "price_per_unit",
@@ -40,12 +41,19 @@
    "fieldname": "image",
    "fieldtype": "Attach Image",
    "label": "Image"
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Link",
+   "label": "Category",
+   "options": "Category",
+   "reqd": 1
   }
  ],
  "image_field": "image",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-10-13 16:26:08.259872",
+ "modified": "2021-10-18 15:40:41.822018",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Items",

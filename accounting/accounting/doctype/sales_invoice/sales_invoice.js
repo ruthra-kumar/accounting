@@ -13,6 +13,33 @@ function calculate_invoice_total(items){
     return total;
 }
 
+function calculate_item_total(frm, cdt, cdn){
+    var doc = locals[cdt][cdn];
+    var tax_amount = 0.0;
+    var tax_rate = 0.0;
+    var net_item_amount = doc.price * doc.quantity;
+
+
+    frm.call('get_tax_rate', {item: doc.item})
+	.then(function(response){
+	    //get tax
+	    tax_rate = response.message.taxrate;
+	    tax_amount = net_item_amount * tax_rate;
+
+
+	    //calculate price on item
+	    if(doc.item && doc.quantity){
+		frappe.model.set_value(doc.doctype, doc.name, 'net_amount', net_item_amount);
+		frappe.model.set_value(doc.doctype, doc.name, 'tax', tax_amount);
+		frappe.model.set_value(doc.doctype, doc.name, 'total', net_item_amount + tax_amount);
+	    }
+
+	    //calculate invoice total
+	    frm.set_value('total_amount', calculate_invoice_total(frm.doc.items));
+	});
+}
+
+
 frappe.ui.form.on('Sales Invoice', {
     validate: function(frm){
 	frm.doc.items.forEach(item => {
@@ -33,32 +60,21 @@ frappe.ui.form.on('Sales Invoice', {
 frappe.ui.form.on('Sales Invoice Items', {
     item(frm, cdt, cdn){
 	var doc = locals[cdt][cdn];
-
-	//calculate price on item
 	if(doc.item && doc.quantity){
-	    frappe.model.set_value(doc.doctype, doc.name, 'total', doc.price * doc.quantity);
+	    calculate_item_total(frm, cdt, cdn);
 	}
-
-	//calculate invoice total
-	frm.set_value('total_amount', calculate_invoice_total(frm.doc.items));
     },
     quantity(frm, cdt, cdn){
 	var doc = locals[cdt][cdn];
-
-	//calculate price on item
 	if(doc.item && doc.quantity){
-	    frappe.model.set_value(doc.doctype, doc.name, 'total', doc.price * doc.quantity);
+	    calculate_item_total(frm, cdt, cdn);
 	}
-
-	//calculate invoice total
-	frm.set_value('total_amount', calculate_invoice_total(frm.doc.items));
     },
     items_add(frm, cdt, cdn){
 	//calculate invoice total
 	frm.set_value('total_amount', calculate_invoice_total(frm.doc.items));
     },
     items_remove(frm, cdt, cdn){
-	console.log("row removed");
 	//calculate invoice total
 	frm.set_value('total_amount', calculate_invoice_total(frm.doc.items));
     },

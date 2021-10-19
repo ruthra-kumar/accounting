@@ -10,6 +10,8 @@
   "item",
   "quantity",
   "price",
+  "net_amount",
+  "tax",
   "total"
  ],
  "fields": [
@@ -33,7 +35,7 @@
    "fetch_from": "item.price_per_unit",
    "fieldname": "price",
    "fieldtype": "Currency",
-   "label": "Price",
+   "label": "Price Per Unit",
    "read_only": 1
   },
   {
@@ -41,12 +43,23 @@
    "fieldtype": "Currency",
    "label": "Total",
    "read_only": 1
+  },
+  {
+   "fieldname": "tax",
+   "fieldtype": "Currency",
+   "label": "Tax",
+   "read_only": 1
+  },
+  {
+   "fieldname": "net_amount",
+   "fieldtype": "Data",
+   "label": "Net Amount"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2021-10-13 21:14:03.770625",
+ "modified": "2021-10-18 20:40:48.351427",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Sales Invoice Items",
