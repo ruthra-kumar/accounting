@@ -11,14 +11,14 @@
  "fields": [
   {
    "fieldname": "books_active_from",
-   "fieldtype": "Data",
+   "fieldtype": "Date",
    "label": "Books Active From"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2021-10-13 16:12:50.093999",
+ "modified": "2021-10-19 14:51:29.950711",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Account Settings",

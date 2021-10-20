@@ -29,7 +29,7 @@
   },
   {
    "fieldname": "quantity",
-   "fieldtype": "Data",
+   "fieldtype": "Int",
    "label": "Quantity"
   },
   {
@@ -53,7 +53,7 @@
  "image_field": "image",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-10-18 15:40:41.822018",
+ "modified": "2021-10-19 14:51:12.130797",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Items",

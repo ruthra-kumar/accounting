@@ -64,13 +64,13 @@
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
-   "options": "Draft\nUnpaid\nPartly Paid\nPaid"
+   "options": "Draft\nUnpaid\nPartly Paid\nPaid\nCancelled"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-10-15 17:24:17.024892",
+ "modified": "2021-10-19 10:12:48.640430",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Sales Invoice",

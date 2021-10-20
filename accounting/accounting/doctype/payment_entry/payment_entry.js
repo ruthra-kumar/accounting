@@ -4,14 +4,13 @@
 frappe.ui.form.on('Payment Entry', {
     refresh: function(frm) {
 
-	frm.set_df_property('invoice_type','read_only', true);
-
 	if(frm.doc.type == 'Receive'){
 	    frm.set_value('invoice_type','Sales Invoice');
 	}
 	else if(frm.doc.type == 'Pay'){
 	    frm.set_value('invoice_type','Purchase Invoice');
 	}
+	frm.set_df_property('invoice_type','read_only', true);
     },
     setup: function(frm){
 	
@@ -50,10 +49,6 @@ frappe.ui.form.on('Payment Entry', {
 		    }
 		});
 
-	    frappe.db.get_doc('Purchase Invoice', frm.doc.invoice_no)
-		.then(r => {
-		    frm.set_value('amount', r.total_amount);
-		});
 	}
     }
 });

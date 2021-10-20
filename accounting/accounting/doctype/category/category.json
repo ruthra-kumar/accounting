@@ -26,14 +26,14 @@
   },
   {
    "fieldname": "tax_rate",
-   "fieldtype": "Data",
+   "fieldtype": "Percent",
    "label": "Tax Rate",
    "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-10-18 18:12:11.215461",
+ "modified": "2021-10-19 14:53:31.622717",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Category",

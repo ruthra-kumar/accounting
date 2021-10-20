@@ -6,11 +6,6 @@ from frappe.utils import getdate
 from frappe.model.document import Document
 
 class PaymentEntry(Document):
-        @frappe.whitelist()
-        def say_hello(self):
-                return { 'outstanding': 0 }
-        
-
         # calculate outstanding amount for invoice
         @frappe.whitelist()
         def get_invoice_outstanding(self, invoice_type, invoice_no):

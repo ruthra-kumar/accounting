@@ -39,7 +39,6 @@ function calculate_item_total(frm, cdt, cdn){
 	});
 }
 
-
 frappe.ui.form.on('Sales Invoice', {
     validate: function(frm){
 	frm.doc.items.forEach(item => {
@@ -66,6 +65,7 @@ frappe.ui.form.on('Sales Invoice Items', {
     },
     quantity(frm, cdt, cdn){
 	var doc = locals[cdt][cdn];
+
 	if(doc.item && doc.quantity){
 	    calculate_item_total(frm, cdt, cdn);
 	}
