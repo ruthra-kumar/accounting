@@ -2,7 +2,7 @@
 # For license information, please see license.txt
 
 import frappe
-from frappe.utils import getdate
+from frappe.utils import getdate, nowtime
 from frappe.model.document import Document
 
 class JournalEntry(Document):
@@ -13,6 +13,7 @@ class JournalEntry(Document):
         def credit_the_giver(self, reverse = False):
                 gl_entry = frappe.new_doc("General Ledger")
                 gl_entry.posting_date = getdate()
+                gl_entry.posting_time = nowtime()
                 gl_entry.transaction_type = "Journal Entry"
                 gl_entry.transaction_no = self.name
                 gl_entry.account = self.from_account
@@ -28,6 +29,7 @@ class JournalEntry(Document):
         def debit_the_receiver(self, reverse = False):
                 gl_entry = frappe.new_doc("General Ledger")
                 gl_entry.posting_date = getdate()
+                gl_entry.posting_time = nowtime()
                 gl_entry.transaction_type = "Journal Entry"
                 gl_entry.transaction_no = self.name
                 gl_entry.account = self.to_account

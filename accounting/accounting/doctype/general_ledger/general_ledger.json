@@ -8,6 +8,7 @@
  "engine": "InnoDB",
  "field_order": [
   "posting_date",
+  "posting_time",
   "account",
   "debit",
   "credit",
@@ -21,6 +22,7 @@
    "fieldtype": "Date",
    "in_list_view": 1,
    "label": "Posting Date",
+   "read_only": 1,
    "reqd": 1
   },
   {
@@ -50,11 +52,18 @@
    "fieldname": "transaction_no",
    "fieldtype": "Data",
    "label": "Transaction No"
+  },
+  {
+   "fieldname": "posting_time",
+   "fieldtype": "Time",
+   "label": "Posting Time",
+   "read_only": 1,
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-10-13 16:27:58.477597",
+ "modified": "2021-10-20 13:30:37.571969",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "General Ledger",

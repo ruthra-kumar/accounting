@@ -2,7 +2,7 @@
 # For license information, please see license.txt
 
 import frappe
-from frappe.utils import getdate
+from frappe.utils import getdate, nowtime
 from frappe.model.document import Document
 
 class PurchaseInvoice(Document):
@@ -23,6 +23,7 @@ class PurchaseInvoice(Document):
         def debit_receiver(self, reverse = False):
                 gl_entry = frappe.new_doc('General Ledger')
                 gl_entry.posting_date = getdate()
+                gl_entry.posting_time = nowtime()
                 gl_entry.account = 'Creditors'
                 if not reverse:
                         gl_entry.debit = self.total_amount
@@ -37,6 +38,7 @@ class PurchaseInvoice(Document):
         def credit_giver(self, reverse = False):
                 gl_entry = frappe.new_doc('General Ledger')
                 gl_entry.posting_date = getdate()
+                gl_entry.posting_time = nowtime()
                 gl_entry.account = 'Expense'
                 if not reverse:
                         gl_entry.debit = 0

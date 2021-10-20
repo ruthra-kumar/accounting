@@ -2,7 +2,7 @@
 # For license information, please see license.txt
 
 import frappe
-from frappe.utils import getdate
+from frappe.utils import getdate, nowtime
 from frappe.model.document import Document
 
 class PaymentEntry(Document):
@@ -43,6 +43,7 @@ class PaymentEntry(Document):
 
                         gl_entry = frappe.new_doc('General Ledger')
                         gl_entry.posting_date = getdate()
+                        gl_entry.posting_time = nowtime()
                         gl_entry.transaction_type = 'Payment Entry'
                         gl_entry.transaction_no = self.name
                         gl_entry.account = 'Debtors'
@@ -53,6 +54,7 @@ class PaymentEntry(Document):
                         # Debit Sales
                         gl_entry = frappe.new_doc('General Ledger')
                         gl_entry.posting_date = getdate()
+                        gl_entry.posting_time = nowtime()
                         gl_entry.transaction_type = 'Payment Entry'
                         gl_entry.transaction_no = self.name
                         gl_entry.account = 'Sales'
@@ -66,6 +68,7 @@ class PaymentEntry(Document):
                 # Reverse General Ledger posting
                 gl_entry = frappe.new_doc('General Ledger')
                 gl_entry.posting_date = getdate()
+                gl_entry.posting_time = nowtime()
                 gl_entry.transaction_type = 'Payment Entry'
                 gl_entry.transaction_no = self.name
                 gl_entry.account = 'Sales'
@@ -75,6 +78,7 @@ class PaymentEntry(Document):
 
                 gl_entry = frappe.new_doc('General Ledger')
                 gl_entry.posting_date = getdate()
+                gl_entry.posting_time = nowtime()
                 gl_entry.transaction_type = 'Payment Entry'
                 gl_entry.transaction_no = self.name
                 gl_entry.account = 'Debtors'
