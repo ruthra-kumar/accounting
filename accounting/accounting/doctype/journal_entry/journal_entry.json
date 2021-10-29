@@ -7,30 +7,13 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "from_account",
-  "to_account",
+  "debit",
+  "credit",
   "entry_date",
   "amount",
-  "ledger_entry",
   "amended_from"
  ],
  "fields": [
-  {
-   "fieldname": "from_account",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "From Account",
-   "options": "Accounts",
-   "reqd": 1
-  },
-  {
-   "fieldname": "to_account",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "To Account",
-   "options": "Accounts",
-   "reqd": 1
-  },
   {
    "default": "Today",
    "fieldname": "entry_date",
@@ -45,11 +28,6 @@
    "reqd": 1
   },
   {
-   "fieldname": "ledger_entry",
-   "fieldtype": "Data",
-   "label": "Ledger Entry"
-  },
-  {
    "fieldname": "amended_from",
    "fieldtype": "Link",
    "label": "Amended From",
@@ -57,12 +35,28 @@
    "options": "Journal Entry",
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "fieldname": "debit",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Debit",
+   "options": "Accounts",
+   "reqd": 1
+  },
+  {
+   "fieldname": "credit",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Credit",
+   "options": "Accounts",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-10-13 18:41:42.397558",
+ "modified": "2021-10-26 10:01:15.704668",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Journal Entry",

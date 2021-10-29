@@ -20,33 +20,33 @@ class PurchaseInvoice(Document):
                 if len(self.items) == 0:
                         frappe.throw(f'Select atleast one item')
 
-        def debit_receiver(self, reverse = False):
+        def debit_purchase(self, reverse = False):
+                gl_entry = frappe.new_doc('General Ledger')
+                gl_entry.posting_date = getdate()
+                gl_entry.posting_time = nowtime()
+                gl_entry.account = 'Stocks Unpaid'
+                if reverse:
+                        gl_entry.debit = 0
+                        gl_entry.credit = self.total_amount
+                else:
+                        gl_entry.debit = self.total_amount
+                        gl_entry.credit = 0
+                gl_entry.transaction_type = 'Purchase Invoice'
+                gl_entry.transaction_no  =   self.name
+                gl_entry.insert()
+                
+        def credit_creditors(self, reverse = False):
                 gl_entry = frappe.new_doc('General Ledger')
                 gl_entry.posting_date = getdate()
                 gl_entry.posting_time = nowtime()
                 gl_entry.account = 'Creditors'
-                if not reverse:
+                if reverse:
                         gl_entry.debit = self.total_amount
                         gl_entry.credit = 0
                 else:
                         gl_entry.debit = 0
                         gl_entry.credit = self.total_amount
-                gl_entry.transaction_type = 'Sales Invoice'
-                gl_entry.transaction_no  =   self.name
-                gl_entry.insert()
-                
-        def credit_giver(self, reverse = False):
-                gl_entry = frappe.new_doc('General Ledger')
-                gl_entry.posting_date = getdate()
-                gl_entry.posting_time = nowtime()
-                gl_entry.account = 'Expense'
-                if not reverse:
-                        gl_entry.debit = 0
-                        gl_entry.credit = self.total_amount
-                else:
-                        gl_entry.debit = self.total_amount
-                        gl_entry.credit = 0
-                gl_entry.transaction_type = 'Sales Invoice'
+                gl_entry.transaction_type = 'Purchase Invoice'
                 gl_entry.transaction_no  =   self.name
                 gl_entry.insert()
 
@@ -59,8 +59,8 @@ class PurchaseInvoice(Document):
 
         def on_submit(self):
                 # create ledger entries
-                self.debit_receiver();
-                self.credit_giver();
+                self.debit_purchase();
+                self.credit_creditors();
 
 
         def before_cancel(self):
@@ -68,6 +68,6 @@ class PurchaseInvoice(Document):
 
         def on_cancel(self):
                 # reverse ledger entries
-                self.debit_receiver(reverse = True)
-                self.credit_giver(reverse = True)
+                self.debit_purchase(reverse = True)
+                self.credit_creditors(reverse = True)
 

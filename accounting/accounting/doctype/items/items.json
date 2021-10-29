@@ -12,7 +12,8 @@
   "description",
   "quantity",
   "price_per_unit",
-  "image"
+  "image",
+  "route"
  ],
  "fields": [
   {
@@ -48,12 +49,18 @@
    "label": "Category",
    "options": "Category",
    "reqd": 1
+  },
+  {
+   "fieldname": "route",
+   "fieldtype": "Data",
+   "label": "route"
   }
  ],
+ "has_web_view": 1,
  "image_field": "image",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-10-19 14:51:12.130797",
+ "modified": "2021-10-28 17:40:03.255808",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Items",
@@ -73,6 +80,7 @@
    "write": 1
   }
  ],
+ "route": "shop",
  "sort_field": "modified",
  "sort_order": "DESC",
  "track_changes": 1

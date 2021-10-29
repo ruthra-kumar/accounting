@@ -40,6 +40,16 @@ function calculate_item_total(frm, cdt, cdn){
 }
 
 frappe.ui.form.on('Sales Invoice', {
+
+    // onload: function(frm){
+    // 	if(frm.doc.items){
+    // 	    frm.set_value('items',[]);
+    // 	    // frappe.new_doc('Sales Invoice Items')
+    // 	    // 	.then( response => {
+    // 	    // 	    frm.doc.items.push(r.message);
+    // 	    // 	});
+    // 	}
+    // },
     validate: function(frm){
 	frm.doc.items.forEach(item => {
 	    if(Number.isInteger(Number.parseInt(item.quantity)) == false || Number.parseInt(item.quantity) <= 0){

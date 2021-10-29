@@ -1,39 +1,17 @@
-
-__version__ = '0.0.1'
-
 import frappe
-
-
-def wipe_data():
-    doctypes = [
-        'Journal Entry',
-        'Payment Entry',
-        'Payment Items',
-        'Purchase Invoice',
-        'Purchase Invoice Items',
-        'Sales Invoice',
-        'Sales Invoice Items',
-        'General Ledger',
-        # 'Accounts'
-    ]
-
-
-    for x in doctypes:
-        frappe.db.delete(x)
-        # print(f'Doctype {x} cleared')
-
-    frappe.db.commit()
-
+import accounting
+import unittest
 
 # setup basic accounts for testing
-def setup_accounts():
+def setup_test_accounts():
 
-    print('Setting up basic accounts')
-    accounts = [    {'doctype': 'Accounts', 'name1': 'Gada Electronics', 'description': 'root node for company','type': 'None' ,'is_group': 1},
-                    {'doctype': 'Accounts', 'name1': 'Assets','type': 'None' ,'is_group': 1 , 'parent_accounts': 'Gada Electronics'},
-                    {'doctype': 'Accounts', 'name1': 'Liabilities','type': 'None' ,'is_group': 1, 'parent_accounts': 'Gada Electronics'},
-                    {'doctype': 'Accounts', 'name1': 'Income','type': 'None' ,'is_group': 1, 'parent_accounts': 'Gada Electronics'},
-                    {'doctype': 'Accounts', 'name1': 'Expenses','type': 'None' ,'is_group': 1, 'parent_accounts': 'Gada Electronics'},
+
+    print('Setting up test accounts')
+    accounts = [    {'doctype': 'Accounts', 'name1': 'Dummy Company', 'description': 'root node for company','type': 'None' ,'is_group': 1},
+                    {'doctype': 'Accounts', 'name1': 'Assets','type': 'None' ,'is_group': 1 , 'parent_accounts': 'Dummy Company'},
+                    {'doctype': 'Accounts', 'name1': 'Liabilities','type': 'None' ,'is_group': 1, 'parent_accounts': 'Dummy Company'},
+                    {'doctype': 'Accounts', 'name1': 'Income','type': 'None' ,'is_group': 1, 'parent_accounts': 'Dummy Company'},
+                    {'doctype': 'Accounts', 'name1': 'Expenses','type': 'None' ,'is_group': 1, 'parent_accounts': 'Dummy Company'},
                     {'doctype': 'Accounts', 'name1': 'Cash', 'is_group': 0,'type': 'Real' , 'parent_accounts': 'Assets'},
                     {'doctype': 'Accounts', 'name1': 'Debtors', 'is_group': 0,'type': 'Personal' , 'parent_accounts': 'Assets'},
                     {'doctype': 'Accounts', 'name1': 'HDFC', 'is_group': 0,'type': 'Real' , 'parent_accounts': 'Assets'},
@@ -48,6 +26,13 @@ def setup_accounts():
     # try:
     
     [frappe.get_doc(x).insert().save() for x in accounts]
+    frappe.db.commit()
     # except Exception as e:
     #     print("Exception Occured", e)
             
+def prepare_accounts():
+    print('Clearing Old data')
+    accounting.wipe_data()
+
+    setup_test_accounts()
+    

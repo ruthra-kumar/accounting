@@ -111,7 +111,6 @@ frappe.ui.form.on('Purchase Invoice Items', {
 	frm.set_value('total_amount', calculate_invoice_total(frm.doc.items));
     },
     items_remove(frm, cdt, cdn){
-	console.log("row removed");
 	//calculate invoice total
 	frm.set_value('total_amount', calculate_invoice_total(frm.doc.items));
     },

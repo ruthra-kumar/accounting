@@ -131,8 +131,9 @@ app_license = "MIT"
 # -------
 
 # before_tests = "accounting.install.before_tests"
+before_tests = "accounting.accounting.doctype.setup_accounts.prepare_accounts"
 
-# Overriding Methods
+# overriding Methods
 # ------------------------------
 #
 # override_whitelisted_methods = {

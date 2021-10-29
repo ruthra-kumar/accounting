@@ -26,32 +26,32 @@ class SalesInvoice(Document):
                                 frappe.throw(f'Only {item_doc.quantity} left in stock for Item:\'{x.item}\'')
                                 
 
-        def debit_receiver(self, reverse = False):
+        def credit_sales(self, reverse = False):
                 gl_entry = frappe.new_doc('General Ledger')
                 gl_entry.posting_date = getdate()
                 gl_entry.posting_time = nowtime()
                 gl_entry.account = 'Sales'
                 if not reverse:
-                        gl_entry.debit = self.total_amount
-                        gl_entry.credit = 0
-                else:
                         gl_entry.debit = 0
                         gl_entry.credit = self.total_amount
+                else:
+                        gl_entry.debit = self.total_amount
+                        gl_entry.credit = 0
                 gl_entry.transaction_type = 'Sales Invoice'
                 gl_entry.transaction_no  =   self.name
                 gl_entry.insert()
                 
-        def credit_giver(self, reverse = False):
+        def debit_debtors(self, reverse = False):
                 gl_entry = frappe.new_doc('General Ledger')
                 gl_entry.posting_date = getdate()
                 gl_entry.posting_time = nowtime()
                 gl_entry.account = 'Debtors'
                 if not reverse:
-                        gl_entry.debit = 0
-                        gl_entry.credit = self.total_amount
-                else:
                         gl_entry.debit = self.total_amount
                         gl_entry.credit = 0
+                else:
+                        gl_entry.debit = 0
+                        gl_entry.credit = self.total_amount
                 gl_entry.transaction_type = 'Sales Invoice'
                 gl_entry.transaction_no  =   self.name
                 gl_entry.insert()
@@ -65,8 +65,8 @@ class SalesInvoice(Document):
 
         def on_submit(self):
                 # create ledger entries
-                self.debit_receiver();
-                self.credit_giver();
+                self.debit_debtors();
+                self.credit_sales();
 
 
         def before_cancel(self):
@@ -74,5 +74,6 @@ class SalesInvoice(Document):
 
         def on_cancel(self):
                 # reverse ledger entries
-                self.debit_receiver(reverse = True)
-                self.credit_giver(reverse = True)
+                self.debit_debtors(reverse = True)
+                self.credit_sales(reverse = True)
+

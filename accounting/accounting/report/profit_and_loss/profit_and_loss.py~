@@ -1,0 +1,55 @@
+# Copyright (c) 2013, ruthra and contributors
+# License: MIT. See LICENSE
+
+import frappe
+from accounting.accounting.doctype.accounts import utils
+
+def get_immediate_child(node):
+        """
+        Get all immediate child nodes as list
+        """
+        if node != None:
+                children = frappe.db.get_list('Accounts',filters={'parent_accounts':node['name']}, fields=['name','type','is_group'])
+                return children
+
+def get_all_child_as_list(node):
+        """
+        Get all child nodes as a list
+        node - should be a dict with 'name', 'type' and 'is_group' fields
+        return - a list of all child nodes
+        """
+        if node != None:
+                lst = cur_item = []
+                stack = []
+                stack.append(node)
+
+                while len(stack) != 0:
+                        cur_item = stack.pop()
+                        lst.append(cur_item)
+                        children = frappe.db.get_list('Accounts',filters={'parent_accounts':cur_item['name']}, fields=['name'])
+                        # children = frappe.db.get_list('Accounts',filters={'parent_accounts':cur_item['name']}, fields=['name','type','is_group'])
+                        for child in children:
+                                stack.append(child)
+
+                return lst
+                        
+                
+
+def execute(filters=None):
+        columns = [
+                {
+                        'fieldname': 'account',
+                        'fieldtype': 'Data',
+                        'read_only': 1
+                },
+                {
+                        'fieldname': 'balance',
+                        'fieldtype': 'Currency',
+                        'read_only': 1
+                }]
+        data = []
+        accounts = frappe.db.get_list('Accounts',filters={'name':['in',['Gada Electronics','Income']]}, fields=['name','type','is_group'])
+        for acc in accounts:
+                print(get_all_child_as_list(acc))
+
+        return columns, data

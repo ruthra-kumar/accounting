@@ -22,6 +22,15 @@ frappe.ui.form.on('Payment Entry', {
 		},
 	    };
 	});
+
+	frm.set_query('payment_to', () => {
+	    return {
+		filters: {
+		    parent_accounts: ['in', ['Current Assets']]
+		},
+	    };
+	});
+
     },
     type(frm){
 

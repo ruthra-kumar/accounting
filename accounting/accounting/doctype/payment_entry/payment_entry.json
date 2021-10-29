@@ -11,6 +11,7 @@
   "time",
   "column_break_3",
   "amount",
+  "payment_to",
   "section_break_5",
   "type",
   "invoice_type",
@@ -78,17 +79,25 @@
    "fieldname": "invoice_no",
    "fieldtype": "Dynamic Link",
    "label": "Invoice No",
-   "options": "invoice_type"
+   "options": "invoice_type",
+   "reqd": 1
   },
   {
    "fieldname": "section_break_5",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "payment_to",
+   "fieldtype": "Link",
+   "label": "Payment Src/Dest",
+   "options": "Accounts",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-10-15 13:19:10.982087",
+ "modified": "2021-10-26 16:41:03.266643",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Payment Entry",

@@ -9,6 +9,7 @@
  "field_order": [
   "name1",
   "description",
+  "type",
   "lft",
   "rgt",
   "is_group",
@@ -60,12 +61,18 @@
    "fieldtype": "Link",
    "label": "Parent Accounts",
    "options": "Accounts"
+  },
+  {
+   "fieldname": "type",
+   "fieldtype": "Select",
+   "label": "Type",
+   "options": "None\nPersonal\nReal\nNominal"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2021-10-13 16:11:03.774829",
+ "modified": "2021-10-26 08:38:40.722060",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Accounts",
