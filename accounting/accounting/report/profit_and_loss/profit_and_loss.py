@@ -2,34 +2,34 @@
 # License: MIT. See LICENSE
 
 import frappe
-from accounting.accounting.doctype.accounts.utils import calculate_balance_on_node, get_all_child_as_list
-
-def get_immediate_child(node):
-        """
-        Get all immediate child nodes as list
-        """
-        if node != None:
-                children = frappe.db.get_list('Accounts',filters={'parent_accounts':node['name']}, fields=['name','type','is_group'])
-                return children
-
+from accounting.accounting.doctype.accounts.utils import calculate_balance_on_node, get_all_child_as_list, add_total_and_padding
 
 def execute(filters=None):
         columns = [
                 {
+                        'label':'Account',
                         'fieldname': 'account',
                         'fieldtype': 'Data',
                         'read_only': 1
                 },
                 {
+                        'label': 'Balance',
                         'fieldname': 'balance',
                         'fieldtype': 'Currency',
                         'read_only': 1
                 }]
         data = []
-        accounts = frappe.db.get_list('Accounts',filters={'name':['in',['Income','Expenses']]}, fields=['name','type','is_group'])
 
-        for acc in accounts:
-                for node in get_all_child_as_list(acc):
-                        data.append({'account': node['name'],'balance': calculate_balance_on_node(node)['balance']})
+        income = []
+        for node in get_all_child_as_list(frappe.get_doc('Accounts', 'Income').as_dict()):
+                income.append({'account': node['name'],'balance': calculate_balance_on_node(node)['balance'], 'indent': node['level']})
+
+        data += add_total_and_padding(income,'balance','Income')
+
+        expense = []
+        for node in get_all_child_as_list(frappe.get_doc('Accounts', 'Expenses').as_dict()):
+                expense.append({'account': node['name'],'balance': calculate_balance_on_node(node)['balance'], 'indent': node['level']})
+
+        data += add_total_and_padding(expense,'balance','Expense')
 
         return columns, data

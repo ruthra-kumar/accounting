@@ -65,8 +65,10 @@ def get_all_child_as_list(node):
         return - a list of all child nodes
         """
         if node != None:
-                lst = cur_item = []
+                lst = []
+                cur_item = None
                 stack = []
+                node['level'] = 0
                 stack.append(node)
 
                 while len(stack) != 0:
@@ -74,9 +76,22 @@ def get_all_child_as_list(node):
                         lst.append(cur_item)
                         children = frappe.db.get_list('Accounts',filters={'parent_accounts':cur_item['name']}, fields=['name','type','is_group'])
                         for child in children:
-                                stack.append(child)
+                            child['level'] = cur_item['level'] + 1
+                            stack.append(child)
 
                 return lst
+
+def add_total_and_padding(src, field ,name):
+        """
+        src - rows to add
+        field - dict field to use as total
+        name - name to display in total row
+
+        return - list with total row added to the last and a 1 row padding at top and bottom
+        """
+        total = list(filter(lambda x: x['account'] == name,src))[0][field] if list(filter(lambda x: x['account'] == name,src)) != [] else 0
+
+        return [{}] + src + [{'account': f'Total {name}', 'balance': total, 'indent': 0}] + [{}]
 
 @frappe.whitelist()
 def get_node_balances(nodes):
