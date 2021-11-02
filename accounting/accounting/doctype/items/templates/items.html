@@ -2,6 +2,15 @@
 
 {% block page_content %}
 <h1>{{ title }}</h1>
+<div class="py-8 row">
+  <div class="col-sm-2">
+    <img src="{{image}}" />
+  </div>
+  <div class="col">
+    <p>{{ description }} </p>
+    <p>{{ price_per_unit }} </p>
+  </div>
+</div>
 {% endblock %}
 
 <!-- this is a sample default web page template -->

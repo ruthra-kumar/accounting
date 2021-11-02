@@ -9,9 +9,10 @@
  "field_order": [
   "customer",
   "invoice_date",
+  "status",
   "column_break_3",
   "total_amount",
-  "status",
+  "tax",
   "section_break_5",
   "items",
   "amended_from"
@@ -65,12 +66,17 @@
    "fieldtype": "Select",
    "label": "Status",
    "options": "Draft\nUnpaid\nPartly Paid\nPaid\nCancelled"
+  },
+  {
+   "fieldname": "tax",
+   "fieldtype": "Currency",
+   "label": "Tax"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-10-19 10:12:48.640430",
+ "modified": "2021-11-02 17:51:12.261207",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Sales Invoice",
@@ -86,6 +92,18 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Guest",
    "share": 1,
    "write": 1
   }

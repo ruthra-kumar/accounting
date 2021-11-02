@@ -5,35 +5,18 @@
 frappe.query_reports["GL Report"] = {
     "filters": [
 	{
-		"fieldname":"account",
-		"label": __("Account"),
-		"fieldtype": "Data",
-		// "default": frappe.defaults.get_user_default("company")
-	},
-	{
-		"fieldname":"type",
-		"label": __("Type"),
-		"fieldtype": "Data",
-		// "default": frappe.defaults.get_user_default("company")
-	},
-	{
-		"fieldname":"debit",
-		"label": __("Debit"),
-		"fieldtype": "Currency",
-		// "default": frappe.defaults.get_user_default("company")
-	},
-	{
-		"fieldname":"credit",
-		"label": __("Credit"),
-		"fieldtype": "Currency",
-		// "default": frappe.defaults.get_user_default("company")
-	},
-	{
-		"fieldname":"balance",
-		"label": __("Balance"),
-		"fieldtype": "Currency",
-		// "default": frappe.defaults.get_user_default("company")
+	    "fieldname":"account",
+	    "label": __("Account"),
+	    "fieldtype": "Link",
+	    "options": "Accounts",
 	}
 
-    ]
+    ],
+    "formatter": function(value, row, column, data, default_formatter){
+	if(column.fieldtype == 'Currency' && !(value === undefined)){
+	    value = new Intl.NumberFormat('en-IN', {style: 'currency', currency:'INR'}).format(value);
+	    return "<div style='text-align: right'>"+ value + "</div>";
+	}
+	return default_formatter(value, row, column, data);
+    }
 };

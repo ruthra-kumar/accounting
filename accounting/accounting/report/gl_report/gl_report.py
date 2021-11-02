@@ -3,6 +3,8 @@
 
 import frappe
 
+from accounting.accounting.doctype.accounts.utils import get_all_child_as_list
+
 def execute(filters=None):
         columns = [
                 {
@@ -55,7 +57,29 @@ def execute(filters=None):
                         "label": "Transaction No"
                 }]
 
-        gl_entries = frappe.get_all('General Ledger', fields = ['posting_date', 'posting_time','account', 'debit', 'credit', 'transaction_no', 'transaction_type'], order_by="posting_date,posting_time")
+        gl_entries = []
+   
+        try:
+                filter_node = filters['account']
+                node = frappe.get_doc('Accounts', filter_node)
+                acc_list = []
+                if node.is_group:
+                        acc_list = get_all_child_as_list(node.as_dict())
+
+                        # get leaf nodes
+                        acc_list = list(filter(lambda x: not x['is_group'],acc_list))
+
+                        # get accounts names
+                        acc_name = [x['name'] for x in acc_list]
+
+                        print("Accout List:",acc_list)
+                        gl_entries = frappe.db.get_list('General Ledger', filters={'account': ['in', acc_name]}, fields = ['posting_date', 'posting_time','account', 'debit', 'credit', 'transaction_no', 'transaction_type'], order_by="posting_date,posting_time")
+
+                else:
+                        gl_entries = frappe.db.get_list('General Ledger', filters={'account': node.name}, fields = ['posting_date', 'posting_time','account', 'debit', 'credit', 'transaction_no', 'transaction_type'], order_by="posting_date,posting_time")
+                
+        except KeyError:
+                gl_entries = frappe.get_all('General Ledger', fields = ['posting_date', 'posting_time','account', 'debit', 'credit', 'transaction_no', 'transaction_type'], order_by="posting_date,posting_time")
         
         balance = 0
         total_debit = 0
@@ -74,5 +98,4 @@ def execute(filters=None):
 
 
         data = gl_entries
-        
         return columns, data

@@ -10,7 +10,7 @@ def execute(filters=None):
                         'label':'Account',
                         'fieldname': 'account',
                         'fieldtype': 'Data',
-                        'read_only': 1
+                        'read_only': 1,
                 },
                 {
                         'label': 'Balance',
@@ -18,7 +18,7 @@ def execute(filters=None):
                         'fieldtype': 'Currency',
                         'read_only': 1
                 }]
-        data = []
+        data, message = [], []
 
         income = []
         for node in get_all_child_as_list(frappe.get_doc('Accounts', 'Income').as_dict()):
@@ -32,4 +32,53 @@ def execute(filters=None):
 
         data += add_total_and_padding(expense,'balance','Expense')
 
-        return columns, data
+        # calculate net(profit/loss)
+        total_income = total_expense = 0
+        for x in data:
+                try:
+                
+                        if x['account'] == 'Total Income':
+                                total_income = x['balance']
+                        elif x['account'] == 'Total Expense':
+                                total_expense = x['balance']
+                except KeyError:
+                        pass
+        net = total_income - total_expense
+        data += [{'account': 'Net (profit/loss)', 'balance': net}]
+
+        chart = prepare_chart(columns, data)
+
+        return columns, data, message, chart
+
+def prepare_chart(columns, data):
+
+        total_income = total_expense = 0
+        for x in data:
+                try:
+                
+                        if x['account'] == 'Total Income':
+                                total_income = x['balance']
+                        elif x['account'] == 'Total Expense':
+                                total_expense = x['balance']
+                except KeyError:
+                        pass
+                
+
+        chart = {
+                "data": {
+                        'labels': ["2021-2022"],
+                        'datasets': [
+                                {
+                                        "name": "Total Expense",
+                                        "values": [total_expense]
+                                },
+                                {
+                                        "name": "Total Income",
+                                        "values": [total_income]
+                                }
+                        ]
+                },
+                "type": "bar",
+        }
+        
+        return chart

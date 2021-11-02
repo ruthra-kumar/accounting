@@ -87,7 +87,7 @@ def add_total_and_padding(src, field ,name):
         field - dict field to use as total
         name - name to display in total row
 
-        return - list with total row added to the last and a 1 row padding at top and bottom
+        return - list with total row added to the last and a 1 empty row for padding at top and bottom
         """
         total = list(filter(lambda x: x['account'] == name,src))[0][field] if list(filter(lambda x: x['account'] == name,src)) != [] else 0
 

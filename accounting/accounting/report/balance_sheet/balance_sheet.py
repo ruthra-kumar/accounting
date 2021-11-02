@@ -19,8 +19,8 @@ def execute(filters=None):
                         'read_only': 1
                 }]
 
-        data = []
-        assets = []
+        data, assets, liabilities = [], [], []
+        message = []
         for node in get_all_child_as_list(frappe.get_doc('Accounts', 'Assets').as_dict()):
                 assets.append({'account': node['name'],'balance': calculate_balance_on_node(node)['balance'], 'indent': node['level']})
 
@@ -32,4 +32,39 @@ def execute(filters=None):
 
         data += add_total_and_padding(liabilities,'balance','Liabilities')
 
-        return columns, data
+        chart = prepare_chart(columns, data)
+
+        return columns, data, message, chart
+
+def prepare_chart(columns, data):
+
+        total_assets = total_liabilities = 0
+        for x in data:
+                try:
+                        
+                        if x['account'] == 'Total Assets':
+                                total_assets = x['balance']
+                        elif x['account'] == 'Total Liabilities':
+                                total_liabilities = x['balance']
+                except KeyError:
+                        pass
+                
+
+        chart = {
+                "data": {
+                        'labels': ["2021-2022"],
+                        'datasets': [
+                                {
+                                        "name": "Total Assets",
+                                        "values": [total_assets]
+                                },
+                                {
+                                        "name": "Total Liabilities",
+                                        "values": [total_liabilities]
+                                }
+                        ]
+                },
+                "type": "bar",
+        }
+        
+        return chart

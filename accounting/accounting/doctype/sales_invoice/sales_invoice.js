@@ -3,14 +3,19 @@
 
 function calculate_invoice_total(items){
     var total = 0;
+    var tax = 0;
 
     items.forEach(item => {
 	if(item.total && Number.isNaN(Number.parseFloat(item.total)) == false){
 	    total += item.total;
+	    tax += item.tax;
 	}
     });
 
-    return total;
+    return {
+	'total': total,
+	'tax': tax
+    };
 }
 
 function calculate_item_total(frm, cdt, cdn){
@@ -35,21 +40,13 @@ function calculate_item_total(frm, cdt, cdn){
 	    }
 
 	    //calculate invoice total
-	    frm.set_value('total_amount', calculate_invoice_total(frm.doc.items));
+	    frm.set_value('total_amount', calculate_invoice_total(frm.doc.items).total);
+	    frm.set_value('tax', calculate_invoice_total(frm.doc.items).tax);
 	});
 }
 
 frappe.ui.form.on('Sales Invoice', {
 
-    // onload: function(frm){
-    // 	if(frm.doc.items){
-    // 	    frm.set_value('items',[]);
-    // 	    // frappe.new_doc('Sales Invoice Items')
-    // 	    // 	.then( response => {
-    // 	    // 	    frm.doc.items.push(r.message);
-    // 	    // 	});
-    // 	}
-    // },
     validate: function(frm){
 	frm.doc.items.forEach(item => {
 	    if(Number.isInteger(Number.parseInt(item.quantity)) == false || Number.parseInt(item.quantity) <= 0){
@@ -82,11 +79,13 @@ frappe.ui.form.on('Sales Invoice Items', {
     },
     items_add(frm, cdt, cdn){
 	//calculate invoice total
-	frm.set_value('total_amount', calculate_invoice_total(frm.doc.items));
+	frm.set_value('total_amount', calculate_invoice_total(frm.doc.items).total);
+	frm.set_value('tax', calculate_invoice_total(frm.doc.items).tax);
     },
     items_remove(frm, cdt, cdn){
 	//calculate invoice total
-	frm.set_value('total_amount', calculate_invoice_total(frm.doc.items));
+	frm.set_value('total_amount', calculate_invoice_total(frm.doc.items).total);
+	frm.set_value('tax', calculate_invoice_total(frm.doc.items).tax);
     },
 
 });

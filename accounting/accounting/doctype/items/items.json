@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_guest_to_view": 1,
  "allow_rename": 1,
  "autoname": "format:ITEM-{###}-{item_name}",
  "creation": "2021-10-13 16:19:58.796611",
@@ -13,7 +14,8 @@
   "quantity",
   "price_per_unit",
   "image",
-  "route"
+  "route",
+  "published"
  ],
  "fields": [
   {
@@ -54,13 +56,19 @@
    "fieldname": "route",
    "fieldtype": "Data",
    "label": "route"
+  },
+  {
+   "default": "0",
+   "fieldname": "published",
+   "fieldtype": "Check",
+   "label": "published"
   }
  ],
  "has_web_view": 1,
  "image_field": "image",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-10-28 17:40:03.255808",
+ "modified": "2021-11-02 11:28:00.189220",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Items",
@@ -80,7 +88,7 @@
    "write": 1
   }
  ],
- "route": "shop",
+ "route": "items",
  "sort_field": "modified",
  "sort_order": "DESC",
  "track_changes": 1
