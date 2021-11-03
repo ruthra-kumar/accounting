@@ -3,9 +3,6 @@
 
 frappe.ui.form.on('Cart', {
     refresh: function(frm) {
-	frm.add_custom_button('Order', () => {
-	})
-	console.log('Emacs');
     }
     
 });

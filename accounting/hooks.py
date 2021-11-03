@@ -66,7 +66,7 @@ website_generators = ["Items"]
 # ------------
 
 # before_install = "accounting.install.before_install"
-# after_install = "accounting.install.after_install"
+after_install = "accounting.install.after_install"
 
 # Desk Notifications
 # ------------------

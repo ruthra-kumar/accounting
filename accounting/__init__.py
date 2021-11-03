@@ -65,5 +65,3 @@ def setup_accounts():
         print("Exception Occured on account setup", e)
     print('Account setup done')
 
-def __main__():
-    print('Emacs rocsk')

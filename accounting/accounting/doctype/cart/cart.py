@@ -7,7 +7,7 @@ from frappe.website.website_generator import WebsiteGenerator
 class Cart(WebsiteGenerator):
         @frappe.whitelist()
         def calculate_total(self):
-                print('Emacs rocks')
+                print('point reached')
 
         def validate(self):
                 # throw if cart is empty
