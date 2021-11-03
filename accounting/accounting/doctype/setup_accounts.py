@@ -35,12 +35,11 @@ def setup_test_accounts():
                 ]
 
 
-    # try:
-    
-    [frappe.get_doc(x).insert().save() for x in accounts]
+    try:
+        [frappe.get_doc(x).insert().save() for x in accounts]
+    except Exception as e:
+        print("Exception Occured", e)
     frappe.db.commit()
-    # except Exception as e:
-    #     print("Exception Occured", e)
             
 def prepare_accounts():
     """ clear old accounts data and setup a fresh chart of accounts for testing """

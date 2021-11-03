@@ -1,7 +1,7 @@
 {
  "category": "Modules",
  "charts": [],
- "content": "[{\"type\":\"header\",\"data\":{\"text\":\"Reports\",\"level\":2,\"col\":12}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"General Ledger\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Profit and Loss\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Balance Sheet\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Accounts\",\"col\":4}},{\"type\":\"header\",\"data\":{\"text\":\"Activities\",\"level\":2,\"col\":12}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Invoice\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Purchase Invoice\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Payment Entry\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Tree\",\"col\":4}}]",
+ "content": "[{\"type\":\"header\",\"data\":{\"text\":\"Reports\",\"level\":2,\"col\":12}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"General Ledger\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Profit and Loss\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Balance Sheet\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Chart of Accounts\",\"col\":4}},{\"type\":\"header\",\"data\":{\"text\":\"Recording Transactions\",\"level\":2,\"col\":12}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Invoice\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Purchase Invoice\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Payment Entry\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Journal Entry\",\"col\":4}},{\"type\":\"header\",\"data\":{\"text\":\"Other Activities\",\"level\":2,\"col\":12}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Customers\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Items\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Item Category\",\"col\":4}}]",
  "creation": "2021-11-03 18:33:26.045065",
  "developer_mode_only": 0,
  "disable_user_customization": 0,
@@ -15,7 +15,7 @@
  "is_standard": 1,
  "label": "Accounting",
  "links": [],
- "modified": "2021-11-03 20:08:20.654707",
+ "modified": "2021-11-03 20:21:13.227714",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Accounting",
@@ -27,6 +27,13 @@
  "roles": [],
  "sequence_id": 8,
  "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Journal Entry",
+   "link_to": "Journal Entry",
+   "type": "DocType"
+  },
   {
    "color": "Grey",
    "doc_view": "List",
@@ -44,21 +51,21 @@
   {
    "color": "Grey",
    "doc_view": "List",
+   "label": "Item Category",
+   "link_to": "Category",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
    "label": "Sales Invoice",
    "link_to": "Sales Invoice",
    "type": "DocType"
   },
   {
    "color": "Grey",
-   "doc_view": "Dashboard",
-   "label": "Accounts",
-   "link_to": "Accounts",
-   "type": "DocType"
-  },
-  {
-   "color": "Grey",
-   "doc_view": "List",
-   "label": "Tree",
+   "doc_view": "Tree",
+   "label": "Chart of Accounts",
    "link_to": "Accounts",
    "type": "DocType"
   },
@@ -72,8 +79,22 @@
   {
    "color": "Grey",
    "doc_view": "List",
+   "label": "Customers",
+   "link_to": "Customer",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
    "label": "Payment Entry",
    "link_to": "Payment Entry",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Items",
+   "link_to": "Items",
    "type": "DocType"
   },
   {

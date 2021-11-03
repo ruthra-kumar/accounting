@@ -5,6 +5,7 @@ import frappe
 
 
 def wipe_data():
+    """ helper function. not be called from app"""
     doctypes = [
         'Journal Entry',
         'Payment Entry',
@@ -25,7 +26,7 @@ def wipe_data():
     frappe.db.commit()
 
 
-# setup basic accounts for testing
+# setup basic accounts
 def setup_accounts():
 
     print('Setting up basic accounts')
@@ -57,8 +58,12 @@ def setup_accounts():
                 ]
 
 
-    # try:
-    [frappe.get_doc(x).insert().save() for x in accounts]
-    # except Exception as e:
-    #     print("Exception Occured", e)
-            
+    try:
+        [frappe.get_doc(x).insert().save() for x in accounts]
+        frappe.db.commit()
+    except Exception as e:
+        print("Exception Occured on account setup", e)
+    print('Account setup done')
+
+def __main__():
+    print('Emacs rocsk')
