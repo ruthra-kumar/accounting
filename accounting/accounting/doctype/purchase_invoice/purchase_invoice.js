@@ -20,23 +20,30 @@ function calculate_item_total(frm, cdt, cdn){
     var net_item_amount = doc.price * doc.quantity;
 
 
-    frm.call('get_tax_rate', {item: doc.item})
-	.then(function(response){
-	    //get tax
-	    tax_rate = response.message.taxrate;
-	    tax_amount = net_item_amount * tax_rate;
+    // frm.call('get_tax_rate', {item: doc.item})
+    // 	.then(function(response){
+    // 	    //get tax
+    // 	    tax_rate = response.message.taxrate;
+    // 	    tax_amount = net_item_amount * tax_rate;
 
 
-	    //calculate price on item
-	    if(doc.item && doc.quantity){
-		frappe.model.set_value(doc.doctype, doc.name, 'net_amount', net_item_amount);
-		frappe.model.set_value(doc.doctype, doc.name, 'tax', tax_amount);
-		frappe.model.set_value(doc.doctype, doc.name, 'total', net_item_amount + tax_amount);
-	    }
+    // 	    //calculate price on item
+    // 	    if(doc.item && doc.quantity){
+    // 		frappe.model.set_value(doc.doctype, doc.name, 'net_amount', net_item_amount);
+    // 		frappe.model.set_value(doc.doctype, doc.name, 'tax', tax_amount);
+    // 		frappe.model.set_value(doc.doctype, doc.name, 'total', net_item_amount + tax_amount);
+    // 	    }
 
-	    //calculate invoice total
-	    frm.set_value('total_amount', calculate_invoice_total(frm.doc.items));
-	});
+    // 	    //calculate invoice total
+    // 	    frm.set_value('total_amount', calculate_invoice_total(frm.doc.items));
+    // 	});
+    
+    //calculate item total
+    frappe.model.set_value(doc.doctype, doc.name, 'total', net_item_amount);
+
+    //calculate invoice total
+    frm.set_value('total_amount', calculate_invoice_total(frm.doc.items));
+    
 }
 
 frappe.ui.form.on('Purchase Invoice', {
@@ -67,14 +74,6 @@ frappe.ui.form.on('Purchase Invoice Items', {
 	    calculate_item_total(frm, cdt, cdn);
 	}
 
-	// //calculate price on item
-	// if(doc.quantity && doc.price){
-	    
-	//     frappe.model.set_value(doc.doctype, doc.name, 'total', Number.parseFloat(doc.price) * Number.parseFloat(doc.quantity));
-	// }
-
-	// //calculate invoice total
-	// frm.set_value('total_amount', calculate_invoice_total(frm.doc.items));
     },
     quantity(frm, cdt, cdn){
 	var doc = locals[cdt][cdn];
@@ -83,13 +82,6 @@ frappe.ui.form.on('Purchase Invoice Items', {
 	    calculate_item_total(frm, cdt, cdn);
 	}
 
-	// //calculate price on item
-	// if(doc.quantity && doc.price){
-	//     frappe.model.set_value(doc.doctype, doc.name, 'total', Number.parseFloat(doc.price) * Number.parseFloat(doc.quantity));
-	// }
-
-	// //calculate invoice total
-	// frm.set_value('total_amount', calculate_invoice_total(frm.doc.items));
     },
     price(frm, cdt, cdn){
 	var doc = locals[cdt][cdn];
@@ -97,14 +89,6 @@ frappe.ui.form.on('Purchase Invoice Items', {
 	if(doc.item && doc.quantity && doc.price){
 	    calculate_item_total(frm, cdt, cdn);
 	}
-
-	// //calculate price on item
-	// if(doc.quantity && doc.price){
-	//     frappe.model.set_value(doc.doctype, doc.name, 'total', Number.parseFloat(doc.price) * Number.parseFloat(doc.quantity));
-	// }
-
-	// //calculate invoice total
-	// frm.set_value('total_amount', calculate_invoice_total(frm.doc.items));
     },
     items_add(frm, cdt, cdn){
 	//calculate invoice total

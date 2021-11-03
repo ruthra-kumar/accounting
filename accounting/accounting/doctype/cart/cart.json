@@ -11,6 +11,7 @@
   "column_break_2",
   "date",
   "section_break_4",
+  "item",
   "items",
   "cart_total",
   "invoice",
@@ -72,13 +73,19 @@
    "fieldname": "route",
    "fieldtype": "Data",
    "label": "route"
+  },
+  {
+   "fieldname": "item",
+   "fieldtype": "Link",
+   "label": "Item",
+   "options": "Items"
   }
  ],
  "has_web_view": 1,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-11-02 16:39:48.153079",
+ "modified": "2021-11-03 13:02:28.744570",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Cart",

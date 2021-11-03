@@ -11,9 +11,7 @@ Page created by generator
   <div class="col">
     <p>{{ description }} </p>
     <p>{{ price_per_unit }} </p>
-    {% for field in item %}
-    {{ field }}
-    {% endfor %}
+    <a href="cart/add_item({{ title }})"> Add to cart</a>
   </div>
 </div>
 {% endblock %}

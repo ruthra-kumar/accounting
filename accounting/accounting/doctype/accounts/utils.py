@@ -1,8 +1,5 @@
 import frappe
 
-def calculate_dr_cr_bal(debit, credit):
-    return (debit - credit)
-
 def calculate_leaf_balance(account = None):
     """
     Given a leaf node, calculate the total balance for that account using ledger entries
@@ -12,9 +9,6 @@ def calculate_leaf_balance(account = None):
 
     if account:
         acc_gl_entries = frappe.db.get_list('General Ledger', filters={'account': account['name']}, fields=['debit', 'credit'], order_by='posting_date,posting_time')
-        # bal = list(map(lambda x: (x['debit']-x['credit']), acc_gl_entries))
-        # # print(reduce(lambda x,y: x+y, bal))
-        # print(bal)
 
         # opening balance
         balance = 0

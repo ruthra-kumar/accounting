@@ -5,8 +5,12 @@ import frappe
 from frappe.website.website_generator import WebsiteGenerator
 
 class Cart(WebsiteGenerator):
+        @frappe.whitelist()
+        def calculate_total(self):
+                print('Emacs rocks')
+
         def validate(self):
                 # throw if cart is empty
                 if self.items == []:
-                        frappe.throw('Select atlest one item')
+                        frappe.throw('Select atleast one item')
                 

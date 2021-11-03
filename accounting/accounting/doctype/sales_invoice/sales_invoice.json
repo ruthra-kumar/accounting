@@ -68,15 +68,17 @@
    "options": "Draft\nUnpaid\nPartly Paid\nPaid\nCancelled"
   },
   {
+   "default": "0",
    "fieldname": "tax",
    "fieldtype": "Currency",
-   "label": "Tax"
+   "label": "Tax",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-11-02 17:51:12.261207",
+ "modified": "2021-11-03 08:45:57.905711",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Sales Invoice",
