@@ -25,12 +25,12 @@ bench --site {testsite} --verbose run-tests --app accounting
 ```
 
 ## Screenshots
-![Alt text](screenshots/capture-01.png?raw=true "Accounting Workspace")
-![Alt text](screenshots/capture-02.png?raw=true "Purchase Invoice")
-![Alt text](screenshots/capture-03.png?raw=true "Chart of Accounts")
-![Alt text](screenshots/capture-04.png?raw=true "Profit and Loss")
-![Alt text](screenshots/capture-05.png?raw=true "Balance Sheet")
-![Alt text](screenshots/capture-06.png?raw=true "Sales Invoice")
+![Alt text](screenshots/Capture-01.png?raw=true "Accounting Workspace")
+![Alt text](screenshots/Capture-02.png?raw=true "Purchase Invoice")
+![Alt text](screenshots/Capture-03.png?raw=true "Chart of Accounts")
+![Alt text](screenshots/Capture-04.png?raw=true "Profit and Loss")
+![Alt text](screenshots/Capture-05.png?raw=true "Balance Sheet")
+![Alt text](screenshots/Capture-06.png?raw=true "Sales Invoice")
 
 ## License
 
