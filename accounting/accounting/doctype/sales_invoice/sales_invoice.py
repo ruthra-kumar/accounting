@@ -32,6 +32,23 @@ class SalesInvoice(Document):
 
                 return res
 
+        def calculate_tax_and_total(self):
+                invoice_total = 0
+                total_tax = 0
+                for x in self.items:
+                        item = frappe.get_doc('Items', x.item)
+                        category = frappe.get_doc('Category', item.category)
+                        
+                        x.net_amount = x.quantity * item.price_per_unit
+                        x.tax = x.net_amount * category.tax_rate
+                        x.total = x.net_amount + x.tax
+
+                        invoice_total += x.total
+                        total_tax += x.tax
+
+                self.tax = total_tax
+                self.total_amount = invoice_total
+
         def validate(self):
                 if len(self.items) == 0:
                         frappe.throw(f'Please select atleast one item')
@@ -44,6 +61,9 @@ class SalesInvoice(Document):
                         item_doc = frappe.get_doc('Items', x.item)
                         if item_doc.quantity < x.quantity:
                                 frappe.throw(f'Only {item_doc.quantity} left in stock for Item:\'{x.item}\'')
+
+                # calculate total on items and invoice
+                self.calculate_tax_and_total()
 
 
         def debit_debtors(self, reverse = False):
@@ -91,6 +111,18 @@ class SalesInvoice(Document):
                 gl_entry.transaction_no  =   self.name
                 gl_entry.insert()
 
+        def update_item_stock(self, invoice_cancelled = False):
+                if invoice_cancelled:
+                        for x in self.items:
+                                itm = frappe.get_doc('Items', x.item)
+                                itm.quantity += x.quantity
+                                itm.save()
+                else:
+                        for x in self.items:
+                                itm = frappe.get_doc('Items', x.item)
+                                itm.quantity -= x.quantity
+                                itm.save()
+
         def before_save(self):
                 self.status = 'Draft'
 
@@ -103,9 +135,8 @@ class SalesInvoice(Document):
                 self.credit_sales();
                 self.credit_tax();
                 
-                # # create ledger entries for tax
-                # self.debit_sales();
-                # self.credit_tax();
+                # update stock
+                self.update_item_stock()
 
 
         def before_cancel(self):
@@ -117,3 +148,5 @@ class SalesInvoice(Document):
                 self.credit_sales(reverse = True)
                 self.credit_tax(reverse = True)
 
+                # update stock
+                self.update_item_stock(invoice_cancelled = True)

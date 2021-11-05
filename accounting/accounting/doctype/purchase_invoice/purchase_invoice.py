@@ -13,6 +13,18 @@ class PurchaseInvoice(Document):
                 print(category.tax_rate)
                 return { 'taxrate': category.tax_rate }
 
+        def calculate_invoice_total(self):
+                invoice_total = 0
+                for x in self.items:
+                        item = frappe.get_doc('Items', x.item)
+                        
+                        x.net_amount = x.quantity * item.price_per_unit
+                        x.total = x.net_amount + x.tax
+                        invoice_total += x.total
+
+                self.total_amount = invoice_total
+
+
         def validate(self):
                 if self.supplier is None:
                         frappe.throw(f'Choose a supplier')
@@ -51,6 +63,18 @@ class PurchaseInvoice(Document):
                 gl_entry.insert()
 
 
+        def update_item_stock(self, invoice_cancelled = False):
+                if invoice_cancelled:
+                        for x in self.items:
+                                itm = frappe.get_doc('Items', x.item)
+                                itm.quantity -= x.quantity
+                                itm.save()
+                else:
+                        for x in self.items:
+                                itm = frappe.get_doc('Items', x.item)
+                                itm.quantity += x.quantity
+                                itm.save()
+
         def before_save(self):
                 self.status = 'Draft'
 
@@ -59,8 +83,11 @@ class PurchaseInvoice(Document):
 
         def on_submit(self):
                 # create ledger entries
-                self.debit_purchase();
-                self.credit_creditors();
+                self.debit_purchase()
+                self.credit_creditors()
+
+                # update stock
+                self.update_item_stock()
 
 
         def before_cancel(self):
@@ -71,3 +98,5 @@ class PurchaseInvoice(Document):
                 self.debit_purchase(reverse = True)
                 self.credit_creditors(reverse = True)
 
+                # update stock
+                self.update_item_stock(invoice_cancelled = True)
