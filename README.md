@@ -24,6 +24,9 @@ Create a new test site to run unit tests
 bench --site {testsite} --verbose run-tests --app accounting
 ```
 
-#### License
+## Screenshots
+![Alt text](/screenshots/capture-01.png?raw=true)
+
+## License
 
 MIT
