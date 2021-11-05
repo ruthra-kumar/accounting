@@ -1,7 +1,7 @@
 {
  "category": "Modules",
  "charts": [],
- "content": "[{\"type\":\"header\",\"data\":{\"text\":\"Reports\",\"level\":2,\"col\":12}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"General Ledger\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Profit and Loss\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Balance Sheet\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Chart of Accounts\",\"col\":4}},{\"type\":\"header\",\"data\":{\"text\":\"Recording Transactions\",\"level\":2,\"col\":12}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Invoice\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Purchase Invoice\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Payment Entry\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Journal Entry\",\"col\":4}},{\"type\":\"header\",\"data\":{\"text\":\"Other Activities\",\"level\":2,\"col\":12}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Customers\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Items\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Item Category\",\"col\":4}}]",
+ "content": "[{\"type\":\"header\",\"data\":{\"text\":\"Reports\",\"level\":2,\"col\":12}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"General Ledger\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Profit and Loss\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Balance Sheet\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Chart of Accounts\",\"col\":4}},{\"type\":\"header\",\"data\":{\"text\":\"Recording Transactions\",\"level\":2,\"col\":12}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Invoice\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Purchase Invoice\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Payment Entry\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Journal Entry\",\"col\":4}},{\"type\":\"header\",\"data\":{\"text\":\"Other Activities\",\"level\":2,\"col\":12}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Customers\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Items\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Item Category\",\"col\":4}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Supplier\",\"col\":4}}]",
  "creation": "2021-11-03 18:33:26.045065",
  "developer_mode_only": 0,
  "disable_user_customization": 0,
@@ -15,7 +15,7 @@
  "is_standard": 1,
  "label": "Accounting",
  "links": [],
- "modified": "2021-11-03 20:21:13.227714",
+ "modified": "2021-11-03 20:49:37.168566",
  "modified_by": "Administrator",
  "module": "Accounting",
  "name": "Accounting",
@@ -39,6 +39,13 @@
    "doc_view": "List",
    "label": "Purchase Invoice",
    "link_to": "Purchase Invoice",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Supplier",
+   "link_to": "Supplier",
    "type": "DocType"
   },
   {

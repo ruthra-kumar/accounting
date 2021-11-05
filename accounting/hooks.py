@@ -66,7 +66,7 @@ website_generators = ["Items"]
 # ------------
 
 # before_install = "accounting.install.before_install"
-after_install = "accounting.install.after_install"
+after_install = "accounting.accounting.install.after_install"
 
 # Desk Notifications
 # ------------------
@@ -131,7 +131,7 @@ after_install = "accounting.install.after_install"
 # -------
 
 # before_tests = "accounting.install.before_tests"
-before_tests = "accounting.accounting.doctype.setup_accounts.prepare_accounts"
+before_tests = "accounting.accounting.doctype.test_utility.prepare_accounts"
 
 # overriding Methods
 # ------------------------------
